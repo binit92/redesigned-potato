@@ -11,7 +11,7 @@ public class Util {
 
     private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
 
-    public static  void log(String classname,String message){
+    public static void log(String classname,String message){
         log(classname, message, "info");
     }
 
@@ -23,6 +23,7 @@ public class Util {
 
             logger.addHandler(fH);
 
+
             // configure simple format
             SimpleFormatter sf = new SimpleFormatter();
             fH.setFormatter(sf);
@@ -33,12 +34,16 @@ public class Util {
 
             //log messages into file
             if("error".equalsIgnoreCase(type)){
-                logger.severe(datetime + " " + message);
-            }else {
-                // everything is info log be default
-                logger.info(datetime + " " + message);
-            }
+                logger.severe(datetime + " " + classname + " " + message);
 
+            }else if ("debug".equalsIgnoreCase(type)){
+                // debug is for internal use only
+                logger.fine(datetime + " " + classname + " " + message);
+
+            } else{
+                // everything is info log be default
+                logger.info(datetime + " " + classname + " " + message);
+            }
 
         }catch (IOException io){
             io.printStackTrace();
@@ -46,6 +51,12 @@ public class Util {
     }
 
     public static void logError(String classname, String message){
-
+        log(classname, message, "error");
     }
+
+    public static void logDebug(String classname, String message){
+       // log(classname, message, "debug");
+    }
+
+
 }

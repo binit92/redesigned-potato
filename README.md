@@ -1,13 +1,23 @@
 # redesigned-potato
 Risk Game - SOEN 6441 Team11 project, winter 2021
-(Nilesh, Ritika, Satinder, Gurseerat, Binit )
+(Nilesh, Ritika, Satinder, Gurseerut, Binit )
 
-> Feel free to make changes in the repo, no-pressure as we can always revert the code if something wrong.
+> Feel free to make changes in the repo, no-pressure as we can always revert the code if something goes wrong.
 
 ### Open Tasks :rocket:
 + [Binit] : Read and parse map files
 + [Unassigned] : code to take **number of players** and **map path** as input
 + [Unassigned] : Junit test class to verify maps
++ [Unassigned] : round-robin algorithm to select players
++ [Unassigned] : how players will automatically make Orders
++ [Unassigned] : Action (Advance, reinforce etc) on maps files based on orders, what makes an order invalid
++ [Unassigned] : Rules to conquer a territory (60% attack, 70% defense etc)
++ [Unassigned] : Cards
++ [Unassigned] : Model view Controller
++ [Binit] : observer design pattern
++ [Binit] : strategy design pattern
+
+
 (we will update this list as the requirement comes and as we complete things)
 
 ### Completed Tasks :checkered_flag:
