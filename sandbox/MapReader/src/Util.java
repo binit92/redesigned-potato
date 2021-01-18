@@ -9,17 +9,22 @@ import java.util.logging.SimpleFormatter;
 
 public class Util {
 
+    private static final String TAG = Util.class.getSimpleName();
     private static final String PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
+
+    // 10MB file size
+    public static final int FILE_SIZE = 10 * 1024 * 1024;
 
     public static void log(String classname,String message){
         log(classname, message, "info");
     }
 
     public static void log(String classname,String message, String type){
+
         try{
             // configure the logger
-            Logger logger = Logger.getLogger(classname);
-            FileHandler fH = new FileHandler("risk.log");
+            Logger logger = Logger.getLogger(TAG);
+            FileHandler fH = new FileHandler("risk.log", FILE_SIZE, 2, true);
 
             logger.addHandler(fH);
 
@@ -44,6 +49,8 @@ public class Util {
                 // everything is info log be default
                 logger.info(datetime + " " + classname + " " + message);
             }
+
+            fH.close();
 
         }catch (IOException io){
             io.printStackTrace();
