@@ -32,7 +32,14 @@ public class MapTest {
     @Test
     public void test3() {
         MapTest map = new MapTest();
-        int num = map.verifyCountries(f);  //we need to make method "verifyContinents"
+        int num = map.verifyCountries(f);  //we need to make method "verifyCountries"
+        assertEquals(1, num);
+    }
+ 
+   @Test
+    public void test4() {
+        MapTest map = new MapTest();
+        int num = map.verifyCountries(f);  
         assertEquals(1, num);
     }
 
