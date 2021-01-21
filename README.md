@@ -44,6 +44,30 @@ Risk Game - SOEN 6441 Team11 project, winter 2021
  9. `git push`  - to push this to the master branch.
  (we can keep it simple and submit directly to the master branch (instead of create child branch), there could be two people making changes parallely in a file, then we have to merge it.)
 
+### Extreme Programming Paradigms:
+ 1. Build Plan:
+  - Make a build plan that determines what will be the goals of each successive builds <br>
+  - As each build starts, make a detailed plan. <br>
+  
+ 2. Small Releases:
+  - Three different builds <br>
+  - 3 weeks to deliver the build <br>
+ 
+ 3. System Methaphor
+  - It is a "story" about the system. <br>
+  - The initial project desc is the system metaphor. <br>
+ 
+ 4. Simple Design
+  - Use simple designs for development. <br>
+  - Every time a solution is proposed, it should be debated as to whether it is the simplest solution that can meet the required features. <br>
+  - Overly complex designs should be avoided as a team principle. <br>
+ 
+ 5. Testing
+  - Unit tests must be delivered with each build. <br>
+  - Tests for individual sub-systems has to be created and tested. <br>
+ 
+ 6. 
+
 ### How to use IntellijIdea and submit directly from there:
  1. Download IntellijIdea Community Edition from:
  https://www.jetbrains.com/idea/download/#section=windows
