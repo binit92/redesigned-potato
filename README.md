@@ -30,6 +30,7 @@ Risk Game - SOEN 6441 Team11 project, winter 2021
 3. Free Git Course : https://www.udacity.com/course/version-control-with-git--ud123
 4. [Optional] Git Internals: https://vimeo.com/14629850
 5. How to write commit messages: https://udacity.github.io/git-styleguide
+6. How to use Markdown (Basic Syntax): https://www.markdownguide.org/basic-syntax/
 
 ### How to clone and contribute on this project using command-line:
  1. command to clone `git clone https://github.com/binit92/redesigned-potato.git`
