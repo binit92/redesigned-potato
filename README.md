@@ -86,7 +86,15 @@ Risk Game - SOEN 6441 Team11 project, winter 2021
   - Distribute work evenly across people and over time. <br>
   - Implement practices that ensure efficient usage of time. <br>
  
- 11. 
+ 11. On-Site Customer: <br>
+  - Discuss the project features during lectures. <br>
+  - Contact instructor any time for clarifications. <br>
+ 
+ 12. Coding Standards: <br>
+  - Use a predefined set of coding conventions. <br>
+  - Keep focused on a simple, reduced set of conventions. <br>
+  - These standards will be checked by marker/instructor against the standard used for writing the actual code. <br>
+  - Use a documentation generation software (e.g. Javadoc, DOxygen etc).
 
 ### How to use IntellijIdea and submit directly from there:
  1. Download IntellijIdea Community Edition from:
