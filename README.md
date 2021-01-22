@@ -46,52 +46,52 @@ Risk Game - SOEN 6441 Team11 project, winter 2021
  (we can keep it simple and submit directly to the master branch (instead of create child branch), there could be two people making changes parallely in a file, then we have to merge it.)
 
 ### Extreme Programming Paradigms:
- 1. Build Plan: <br>
+ #### 1. Build Plan: <br>
    - Make a build plan that determines what will be the goals of each successive builds <br>
    - As each build starts, make a detailed plan. <br>
   
- 2. Small Releases: <br>
+ #### 2. Small Releases: <br>
    - Three different builds <br>
    - 3 weeks to deliver the build <br>
  
- 3. System Methaphor: <br>
+ #### 3. System Methaphor: <br>
    - It is a "story" about the system. <br>
    - The initial project desc is the system metaphor. <br>
  
- 4. Simple Design: <br>
+ #### 4. Simple Design: <br>
    - Use simple designs for development. <br>
    - Every time a solution is proposed, it should be debated as to whether it is the simplest solution that can meet the required features. <br>
    - Overly complex designs should be avoided as a team principle. <br>
  
- 5. Testing: <br>
+ #### 5. Testing: <br>
    - Unit tests must be delivered with each build. <br>
    - Tests for individual sub-systems has to be created and tested. <br>
  
- 6. Refactoring: <br>
+ #### 6. Refactoring: <br>
    - After each build is delivered, have a meeting and decide what parts need to be cleaned up before development continues on the next build. <br>
    - Make sure that test run successfully before and after each individual refactoring operation. <br>
  
- 7. Pair Programming: <br>
+ #### 7. Pair Programming: <br>
    - Work in pairs and make sure both individuals know their responsibilities as part of the pair. <br>
  
- 8. Collective Ownership: <br>
+ #### 8. Collective Ownership: <br>
    - Setup a software repository and enforce that it is used as frequently as possible. <br>
  
- 9. Continuous Integration: <br>
+ #### 9. Continuous Integration: <br>
    - Enforce the practice of frequent commits. <br>
    - Activate a continuous integration framework on the repository, e.g. to enforce that any code committed actually compiles and passes all tests. <br>
    - It is done so that everbody is working on the same code base. <br>
    - Use CI tool in GitHub, it allows us to run certain tests during pushing a commit. <br>
   
- 10. Sustainable Pace: <br>
+ #### 10. Sustainable Pace: <br>
    - Distribute work evenly across people and over time. <br>
    - Implement practices that ensure efficient usage of time. <br>
  
- 11. On-Site Customer: <br>
+ #### 11. On-Site Customer: <br>
    - Discuss the project features during lectures. <br>
    - Contact instructor any time for clarifications. <br>
  
- 12. Coding Standards: <br>
+ #### 12. Coding Standards: <br>
    - Use a predefined set of coding conventions. <br>
    - Keep focused on a simple, reduced set of conventions. <br>
    - These standards will be checked by marker/instructor against the standard used for writing the actual code. <br>
