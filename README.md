@@ -70,7 +70,23 @@ Risk Game - SOEN 6441 Team11 project, winter 2021
   - After each build is delivered, have a meeting and decide what parts need to be cleaned up before development continues on the next build. <br>
   - Make sure that test run successfully before and after each individual refactoring operation. <br>
  
- 7. 
+ 7. Pair Programming: <br>
+  - Work in pairs and make sure both individuals know their responsibilities as part of the pair. <br>
+ 
+ 8. Collective Ownership: <br>
+  - Setup a software repository and enforce that it is used as frequently as possible. <br>
+ 
+ 9. Continuous Integration: <br>
+  - Enforce the practice of frequent commits. <br>
+  - Activate a continuous integration framework on the repository, e.g. to enforce that any code committed actually compiles and passes all tests. <br>
+  - It is done so that everbody is working on the same code base. <br>
+  - Use CI tool in GitHub, it allows us to run certain tests during pushing a commit. <br>
+  
+ 10. Sustainable Pace: <br>
+  - Distribute work evenly across people and over time. <br>
+  - Implement practices that ensure efficient usage of time. <br>
+ 
+ 11. 
 
 ### How to use IntellijIdea and submit directly from there:
  1. Download IntellijIdea Community Edition from:
