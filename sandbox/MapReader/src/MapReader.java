@@ -24,7 +24,7 @@ public class MapReader implements IMapConstants {
         try{
             File mapFile = new File(mapPath);
             if(!mapFile.exists()){
-                Util.log(TAG, "map file is not available at: " + mapFile );
+                Util.log(TAG, "map-file is not available at: " + mapFile );
                 return;
             }
             readMapFile(mapFile);
