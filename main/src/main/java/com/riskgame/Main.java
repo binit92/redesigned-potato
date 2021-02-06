@@ -1,3 +1,5 @@
+package com.riskgame;
+
 import java.util.Scanner;
 
 public class Main implements IConstants{
@@ -51,8 +53,8 @@ public class Main implements IConstants{
                     break;
 
                 case COMMAND_SHOW_MAP:
-                    System.out.println("command show map");
-                    // TODO: Display the map as text
+                    System.out.println("command show com.riskgame.map");
+                    // TODO: Display the com.riskgame.map as text
                     break;
 
                 case COMMAND_SAVE_MAP:

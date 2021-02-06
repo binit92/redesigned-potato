@@ -1,7 +1,9 @@
 
+
+
 An informal list to track tasks
 
-+ Main - CommandProcessor 
++ com.riskgame.Main - CommandProcessor 
   - Is this covering all the commands ? 
 + Maven/CI - basics 
   - read these
@@ -18,14 +20,14 @@ TODO
 + Country - class
 + Continent - class  
 + MapReader - class (use code from Sandbox)
-+ MapWriter  - class (create a BufferedWriter to write a .map file)
++ MapWriter  - class (create a BufferedWriter to write a .com.riskgame.map file)
 + EditContinent - workflow (once command comes -add or -remove)
 + EditCountry - workflow  (once command comes -add or -remove)
 + EditNeighbour - workflow (once command comes -add or -remove)
 + ValidateMap - workflow  (What is the logic ? ) - Satinder
 + ShowMap - ShowMap in console output - Ritika
 + GameEngine - what this class is supposed to do ? 
-+ GraphCreator - When .map file is loaded, create an adjancecyList/Matrix to create Graph
++ GraphCreator - When .com.riskgame.map file is loaded, create an adjancecyList/Matrix to create Graph
 + Player - class - Gurseerut
 + Order - class - Gurseerut
 + Game loop - Nilesh
