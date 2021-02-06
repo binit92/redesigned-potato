@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="46b6c47d-ee41-482e-8540-bd93c660be80" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/riskgame/bean/Continent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/riskgame/bean/Country.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/riskgame/map/MapReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/riskgame/map/MapWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/riskgame/MainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/IConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riskgame/IConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/riskgame/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/IConstants.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/main-1.0-SNAPSHOT.jar" beforeDir="false" />
@@ -24,8 +14,6 @@
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sandbox/MapReader/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../sandbox/MapReader/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../sandbox/MapReader/src/IMapConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../sandbox/MapReader/src/IMapConstants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
