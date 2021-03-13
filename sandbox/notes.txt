@@ -1,3 +1,0 @@
-Sandbox - a separate folder to keep all the test codes or standalone codes .
-
-Feel free to make change here, it is supposed to be a folder where we could everything experimental, half-done etc.
