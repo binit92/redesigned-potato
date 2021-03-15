@@ -1,10 +1,10 @@
 package ca.concordia;
 
-import ca.concordia.controller.game.GameEngineTest;
-import ca.concordia.controller.game.PlayerActionsTest;
-import ca.concordia.controller.map.MapEditorTest;
-import ca.concordia.controller.map.ValidateMapTest;
-import ca.concordia.model.*;
+import ca.concordia.gameengine.GameEngineTest;
+import ca.concordia.gameengine.PlayerActionsTest;
+import ca.concordia.mapworks.MapEditorTest;
+import ca.concordia.mapworks.ValidateMapTest;
+import ca.concordia.dao.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
         BorderTest.class,
         ContinentTest.class,
         CountryTest.class,
-        OrderTest.class,
+        Order2Test.class,
         PlayerTest.class,
         GameEngineTest.class,
         PlayerActionsTest.class,

@@ -1,8 +1,8 @@
 package ca.concordia;
 
-import ca.concordia.controller.GameController;
-import ca.concordia.model.GameModel;
-import ca.concordia.view.GameView;
+import ca.concordia.gameengine.GameController;
+import ca.concordia.dao.GameModel;
+import ca.concordia.patterns.observer.GameView;
 
 /**
  * Starting point of the class that initializes all three model, view and controller
