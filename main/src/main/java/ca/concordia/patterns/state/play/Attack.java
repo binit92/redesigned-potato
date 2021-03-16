@@ -1,6 +1,12 @@
 package ca.concordia.patterns.state.play;
 
+import ca.concordia.gameengine.GameEngine;
+
 public class Attack extends MainPlay {
+
+    public Attack(GameEngine p_ge) {
+        super(p_ge);
+    }
 
     public void next() {
         //TODO

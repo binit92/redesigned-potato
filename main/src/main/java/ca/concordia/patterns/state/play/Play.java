@@ -1,11 +1,16 @@
 package ca.concordia.patterns.state.play;
 
+import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.state.Phase;
 
 public class Play extends Phase {
 
+    public Play(GameEngine p_ge){
+        super(p_ge);
+    }
+
     @Override
-    public void loadMap() {
+    public void loadMap(String[] p_Command) {
 
     }
 
@@ -15,17 +20,37 @@ public class Play extends Phase {
     }
 
     @Override
-    public void editCountry(){
+    public void editContinent(String[] p_Command) {
+
+    }
+
+    @Override
+    public void editCountry(String[] p_Command){
         printInvalidCommandMessage();
     }
 
     @Override
-    public void saveMap() {
+    public void editNeighbour(String[] p_Command) {
 
     }
 
     @Override
-    public void setPlayers() {
+    public void saveMap(String[] p_Command) {
+
+    }
+
+    @Override
+    public void editMap(String[] p_Command) {
+
+    }
+
+    @Override
+    public void validateMap(String[] p_Command) {
+
+    }
+
+    @Override
+    public void setPlayers(String[] p_Command) {
 
     }
 

@@ -21,7 +21,7 @@ public class GameEngineTest {
      */
     @Before
     public void before() {
-        d_GameEngine = GameEngine.getInstance(d_Map);
+        d_GameEngine = new GameEngine();
     }
 
     /**

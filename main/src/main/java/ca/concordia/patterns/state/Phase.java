@@ -4,21 +4,34 @@ import ca.concordia.gameengine.GameEngine;
 
 //State in the State pattern
 public abstract class Phase {
-    GameEngine ge;
+    public GameEngine d_ge;
 
-    // general behavior
-    abstract public void loadMap();
+    public Phase(GameEngine p_ge) {
+        this.d_ge = p_ge;
+    }
 
     abstract public void showMap();
 
-    // edit map state behavior
-    abstract public void editCountry();
+    abstract public void editContinent(String[] p_Command);
 
-    abstract public void saveMap();
+    // edit map state behavior
+    abstract public void editCountry(String[] p_Command);
+
+    // edit map state behavior
+    abstract public void editNeighbour(String[] p_Command);
+
+    abstract public void saveMap(String[] p_Command);
+
+    abstract public void editMap(String[] p_Command);
+
+    abstract public void validateMap(String[] p_Command);
+
+    // general behavior
+    abstract public void loadMap(String[] p_Command);
 
     // play state behavior
     // game setup state behavior
-    abstract public void setPlayers();
+    abstract public void setPlayers(String[] p_Command);
 
     abstract public void assignCountries();
 

@@ -1,22 +1,11 @@
 package ca.concordia;
 
-import ca.concordia.gameengine.GameController;
+import ca.concordia.gameengine.GameEngine;
 
 /**
  * GameDriver
  */
 public class Main {
-
-
-    private GameController d_GameController;
-
-
-    /**
-     * Contructor of Main class
-     */
-    public Main() {
-        d_GameController = new GameController();
-    }
 
     /**
      * main method to start the exeuction
@@ -25,13 +14,7 @@ public class Main {
      */
     public static void main(String[] args) {
         System.out.println("Welcome to TEAM-11 Game");
-        new Main().startGame();
+        new GameEngine().start();
     }
 
-    /**
-     * StartGame function to start the execution using controller by taking command inputs from users.
-     */
-    public void startGame() {
-        d_GameController.takeCommandInput();
-    }
 }

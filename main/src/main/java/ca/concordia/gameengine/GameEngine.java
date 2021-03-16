@@ -1,8 +1,14 @@
 package ca.concordia.gameengine;
 
+import ca.concordia.Main;
 import ca.concordia.dao.*;
+import ca.concordia.mapworks.MapEditor;
 import ca.concordia.patterns.state.Phase;
+import ca.concordia.patterns.state.edit.Preload;
+import ca.concordia.patterns.state.play.PlaySetup;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -10,44 +16,72 @@ import java.util.Scanner;
  */
 public class GameEngine {
 
-    public static final String ORDER_DEPLOY = "deploy";
+    // Map editor commands
+    public static final String COMMAND_EDIT_CONTINENT = "editcontinent";
+    public static final String COMMAND_EDIT_COUNTRY = "editcountry";
+    public static final String COMMAND_EDIT_NEIGHBOUR = "editneighbor";
+    public static final String COMMAND_SAVE_MAP = "savemap";
+    public static final String COMMAND_EDIT_MAP = "editmap";
+    public static final String COMMAND_VALIDATE_MAP = "validatemap";
+
+    //Any commands
+    public static final String COMMAND_SHOW_MAP = "showmap";
+    public static final String COMMAND_QUIT = "quit";
+
+    // play commands
+    public static final String COMMAND_LOAD_MAP = "loadmap";
+    public static final String COMMAND_GAME_PLAYER = "gameplayer";
+    public static final String COMMAND_ASSIGN_COUNTRIES = "assigncountries";
+    public static final String COMMAND_DEPLOY = "deploy";
+    public static final String COMMAND_ADVANCE = "advance";
+    public static final String COMMAND_BOMB = "bomb";
+    public static final String COMMAND_BLOCKADE = "blockade";
+    public static final String COMMAND_AIRLIFT = "airlift";
+    public static final String COMMAND_NEGOTIATE = "negotiate";
+
+    // data members
+
     public static boolean GAME_STARTED = false;
     private static GameEngine d_Instance = null;
-    private final Map d_CurrentMap;
-    private final PlayerActions d_PlayerActions;
+    private  Map d_CurrentMap;
+    private  PlayerActions d_PlayerActions;
     private Graph d_Graph;
 
     private Phase d_GamePhase;
-
-    /**
-     * This is a private constructor so that it cannot be
-     * instantiated outside this class ..
-     *
-     * @param p_Map map on which the game is starting
-     */
-    private GameEngine(Map p_Map) {
-        this.d_CurrentMap = p_Map;
-        this.d_PlayerActions = new PlayerActions(this.d_CurrentMap);
-    }
-
-    /**
-     * This is a static method to get the instance of this singleton object
-     *
-     * @param p_Map map on which the game is starting..
-     * @return GameEngine object type
-     */
-    public static GameEngine getInstance(Map p_Map) {
-        if (d_Instance == null) {
-            d_Instance = new GameEngine(p_Map);
-        }
-        return d_Instance;
-    }
 
     public void setPhase(Phase p_Phase){
         this.d_GamePhase = p_Phase;
     }
 
     public void start(){
+
+        Scanner keyboard = new Scanner(System.in);
+        do{
+            System.out.println("========================================");
+            System.out.println("edit");
+            System.out.println("play");
+            System.out.println("quit");
+            System.out.println("choose one of the option from above?: ");
+            System.out.println("=======================================");
+            String l_Input = keyboard.nextLine();
+            switch (l_Input){
+                case "edit" :
+                    // setting phase as preload
+                    setPhase(new Preload(this));
+                    startMapEditor(keyboard);
+                    break;
+                case "play" :
+                    // setting phase as playsetup
+                    setPhase(new PlaySetup(this));
+                    startMainPlay(keyboard);
+                    break;
+                case "quit" :
+                    return;
+            }
+
+        }while(true);
+
+
         // can change the state of the context (Game Engine) object, e.g.
 
         //setPhase(new Preload(this));
@@ -55,9 +89,13 @@ public class GameEngine {
 
         // can trigger state independent behaviour by using the methods
         // define in the State(phase) object e.g.
+
+        //TODO
+        /*
         d_GamePhase.loadMap();
         d_GamePhase.reinforce();
         d_GamePhase.next();
+        */
 
         /*
         for (int turn = 1; turn <= numTurns; turn++) {
@@ -75,6 +113,179 @@ public class GameEngine {
         }
         */
     }
+
+    void startMapEditor(Scanner keyboard){
+        do{
+            System.out.println("===================================================================================================");
+            System.out.println("| PHASE          : command         command arguments                                             |");
+            System.out.println("| Any            : showmap                                                                       |");
+            System.out.println("| Edit:          : editmap        <filepath>                                                     |");
+            System.out.println("| Edit:PostLoad  : editcontinent  -add <continent-name> <continent-id> -remove <continent-name>  |");
+            System.out.println("| Edit:PostLoad  : editcountry    -add <country-name> <continent-name> -remove <country-name>    |");
+            System.out.println("| Edit:PostLoad  : editneighbor  -add <country-name> <neigbor> -remove <country-name> <neighbor> |");
+            System.out.println("| Edit:PostLoad  : savemap        <filepath>                                                     |");
+            System.out.println("| Edit:PostLoad  : validatemap                                                                   |");
+            System.out.println("| Any            : quit                                                                          |");
+            System.out.println("===================================================================================================");
+            String l_EditInput = keyboard.nextLine();
+
+            if("quit".equalsIgnoreCase(l_EditInput)){
+                break;
+            }
+
+            if (l_EditInput.length() > 0) {
+                String[] l_CommandArray = l_EditInput.trim().split(" ");
+                if (l_CommandArray.length > 0) {
+                    String l_FirstCommand = l_CommandArray[0].toLowerCase();
+                    System.out.println("firstCommand : " + l_FirstCommand);
+
+                    switch (l_FirstCommand) {
+                        case COMMAND_EDIT_CONTINENT:
+                            d_GamePhase.editContinent(l_CommandArray);
+                            break;
+
+                        case COMMAND_EDIT_COUNTRY:
+                            d_GamePhase.editCountry(l_CommandArray);
+                            break;
+
+                        case COMMAND_EDIT_NEIGHBOUR:
+                            d_GamePhase.editNeighbour(l_CommandArray);
+                            break;
+
+                        case COMMAND_SHOW_MAP:
+                            d_GamePhase.showMap();
+                            break;
+
+                        case COMMAND_SAVE_MAP:
+                            d_GamePhase.saveMap(l_CommandArray);
+                            break;
+
+                        case COMMAND_EDIT_MAP:
+                            d_GamePhase.editMap(l_CommandArray);
+                            break;
+
+                        case COMMAND_VALIDATE_MAP:
+                            d_GamePhase.validateMap(l_CommandArray);
+                            break;
+
+
+                        default:
+                            System.out.println("INVALID COMMAND in edit phase");
+                    }
+                }
+            }
+
+
+
+        }while (true);
+    }
+
+
+    void startMainPlay(Scanner keyboard){
+        do {
+
+            System.out.println("============================================================================================");
+            System.out.println("| PHASE                : command         command arguments                                 |");
+            System.out.println("| Any                  : showmap                                                           |");
+            System.out.println("| Play:PlaySetup       : loadmap         <filepath>                                        |");
+            System.out.println("| Play:PlaySetup       : gameplayer      -add <player-name>                                |");
+            System.out.println("| Play:PlaySetup       : assigncountries                                                   |");
+            System.out.println("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
+            System.out.println("| Play:MainPlay:Order  : advance         <country-from> <country-to> <num-of-armies>       |");
+            System.out.println("| Play:MainPlay:Order  : bomb            <country-name>                                    |");
+            System.out.println("| Play:MainPlay:Order  : blockade        <country-name>                                    |");
+            System.out.println("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
+            System.out.println("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
+            System.out.println("| Any                  : quit                                                              |");
+            System.out.println("============================================================================================");
+
+            String l_GameInput = keyboard.nextLine();
+
+            if("quit".equalsIgnoreCase(l_GameInput)){
+                break;
+            }
+
+            if (l_GameInput.length() > 0) {
+                String[] l_CommandArray = l_GameInput.trim().split(" ");
+                if (l_CommandArray.length > 0) {
+                    String l_FirstCommand = l_CommandArray[0].toLowerCase();
+                    System.out.println("firstCommand : " + l_FirstCommand);
+
+                    switch (l_FirstCommand) {
+
+
+
+                        case COMMAND_LOAD_MAP:
+                            d_GamePhase.loadMap(l_CommandArray);
+                            break;
+
+                        case COMMAND_GAME_PLAYER:
+                            break;
+
+                        case COMMAND_ASSIGN_COUNTRIES:
+                            break;
+
+                        case COMMAND_SHOW_MAP:
+                            d_GamePhase.showMap();
+                            break;
+
+                        case COMMAND_DEPLOY:
+                            System.out.println("deploy");
+                            break;
+
+                        case COMMAND_ADVANCE:
+                            System.out.println("advance");
+                            break;
+
+                        case COMMAND_BOMB:
+                            System.out.println("bomb");
+                            break;
+
+                        case COMMAND_BLOCKADE:
+                            System.out.println("blockade");
+                            break;
+
+                        case COMMAND_AIRLIFT:
+                            System.out.println("airlift");
+                            break;
+
+                        case COMMAND_NEGOTIATE:
+                            System.out.println("negotiate");
+                            break;
+
+                        default:
+                             System.out.println("INVALID COMMAND in play phase");
+                    }
+                }
+            }
+        }while(true);
+    }
+
+    /**
+     * Helper method to process loadmap command to start the game play on a map
+     *
+     * @param p_Command command array
+     */
+    private void processLoadGameCommand(String[] p_Command) {
+        System.out.println("load map to start game ..");
+        try {
+            String l_Filename = p_Command[1];
+            if (!l_Filename.isEmpty()) {
+                System.out.println("loadmap command received ..");
+                File l_MapFile = new File(l_Filename);
+                if (l_MapFile.exists()) {
+                    Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile);
+                    GameEngine l_GameEngine = new GameEngine();
+                    l_GameEngine.loadMapforGame();
+                } else {
+                    System.out.println("The map file" + l_MapFile.getAbsolutePath() + "doesn't exists");
+                }
+            }
+        } catch (Exception p_E) {
+            p_E.printStackTrace();
+        }
+    }
+
 
     void executeAllOrders() {
         /*
@@ -132,7 +343,7 @@ public class GameEngine {
             } else {
                 if (l_Input.length() > 0) {
                     String[] l_CommandArray = l_Input.trim().split(" ");
-                    if (processCommands(l_CommandArray)) {
+                    if (processCommands2(l_CommandArray)) {
                         mainGameLoop();
                     }
                 }
@@ -145,7 +356,7 @@ public class GameEngine {
      *
      * @param p_Command commands applicable into game play
      */
-    private boolean processCommands(String[] p_Command) {
+    private boolean processCommands2(String[] p_Command) {
         boolean l_BreakLoop = false;
         try {
             if (p_Command.length > 0) {
@@ -154,15 +365,15 @@ public class GameEngine {
 
                 switch (l_firstCommand) {
 
-                    case GameController.COMMAND_SHOW_MAP:
+                    case COMMAND_SHOW_MAP:
                         showMapforGame();
                         break;
 
-                    case GameController.COMMAND_GAME_PLAYER:
+                    case COMMAND_GAME_PLAYER:
                         processGamePlayerCommand(p_Command);
                         break;
 
-                    case GameController.COMMAND_ASSIGN_COUNTRIES:
+                    case COMMAND_ASSIGN_COUNTRIES:
                         l_BreakLoop = processAssignCountriesCommand();
                         break;
                     default:
@@ -269,14 +480,14 @@ public class GameEngine {
                     String[] l_CommandArray = l_Input.trim().split(" ");
                     try {
                         String l_Command = l_CommandArray[0];
-                        if ((GameController.COMMAND_DEPLOY).equalsIgnoreCase(l_Command)) {
+                        if ((COMMAND_DEPLOY).equalsIgnoreCase(l_Command)) {
                             processDeployCommand(l_Player, l_CommandArray);
                             System.out.println("armies left to deply are : " + l_Player.getNoOfArmies());
                             if (l_Player.getNoOfArmies() < 1) {
                                 System.out.println("All the reinforcement armies have been placed ..");
                                 break;
                             }
-                        } else if ((GameController.COMMAND_SHOW_MAP).equalsIgnoreCase(l_Command)) {
+                        } else if ((COMMAND_SHOW_MAP).equalsIgnoreCase(l_Command)) {
                             showMapforGame();
                         } else if ("exit".equalsIgnoreCase(l_Command)) {
                             GAME_STARTED = false;
@@ -414,7 +625,7 @@ public class GameEngine {
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (l_ArmyCountOfPlayer >= l_NumInt) {
                     p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
-                    Order2 l_order2 = new Order2(ORDER_DEPLOY, l_CountryName, l_NumInt);
+                    Order2 l_order2 = new Order2(COMMAND_DEPLOY, l_CountryName, l_NumInt);
                     p_Player.addNewOrder(l_order2);
                 } else {
                     System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
