@@ -6,4 +6,14 @@ public class Airlift implements Order {
     public void execute() {
 
     }
+
+    @Override
+    public boolean valid() {
+        return false;
+    }
+
+    @Override
+    public void printOrder() {
+
+    }
 }

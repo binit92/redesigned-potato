@@ -3,9 +3,7 @@ package ca.concordia.gameengine;
 import ca.concordia.Main;
 import ca.concordia.patterns.observer.Observable;
 import ca.concordia.mapworks.MapEditor;
-import ca.concordia.dao.GameModel;
 import ca.concordia.dao.Map;
-import ca.concordia.patterns.observer.GameView;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,7 +18,7 @@ import java.util.Scanner;
  * Context of the state pattern
  */
 
-public class GameController extends Observable {
+public class GameController {
 
 
     public static final String COMMAND_LOAD_MAP = "loadmap";
@@ -36,20 +34,6 @@ public class GameController extends Observable {
     public static final String COMMAND_SAVE_MAP = "savemap";
     public static final String COMMAND_EDIT_MAP = "editmap";
     public static final String COMMAND_VALIDATE_MAP = "validatemap";
-
-    private GameModel d_GameModel;
-    private GameView d_GameView;
-
-    /**
-     * Game Controller constructor
-     *
-     * @param p_GameView  Game View
-     * @param p_GameModel Game model
-     */
-    public GameController(GameView p_GameView, GameModel p_GameModel) {
-        d_GameView = p_GameView;
-        d_GameModel = p_GameModel;
-    }
 
 
 
