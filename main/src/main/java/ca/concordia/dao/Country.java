@@ -6,7 +6,7 @@ package ca.concordia.dao;
  * <p>
  * Details of maps can be found at : http://domination.sourceforge.net/makemaps.shtml
  */
-public class Country {
+public class Country extends Territory {
 
     private int d_CountryID;
     private String d_Name;
@@ -14,6 +14,7 @@ public class Country {
     private int d_X;
     private int d_Y;
     private int d_ArmyCount;
+    private String d_OwnerName;
 
     /**
      * Constructor initializes all the member variables of Country class
@@ -142,4 +143,13 @@ public class Country {
     }
 
 
+    @Override
+    public String getOwner() {
+        return d_OwnerName;
+    }
+
+    @Override
+    public void setOwner(String p_OwnerName) {
+        this.d_OwnerName = p_OwnerName;
+    }
 }

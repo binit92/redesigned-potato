@@ -1,10 +1,10 @@
 package ca.concordia.patterns.state.play;
 
 import ca.concordia.dao.Player;
+import ca.concordia.dao.Territory;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.Deploy;
 import ca.concordia.patterns.command.Order;
-import ca.concordia.patterns.state.end.End;
 
 import java.util.Scanner;
 
@@ -73,7 +73,7 @@ public class Attack extends MainPlay {
 
             if ("quit".equalsIgnoreCase(l_CommandInput)) {
                 //TODO: end the game if quit is passed during the attack ?
-                
+
                 d_ge.getPhase().endGame();
                 return;
             }
@@ -86,27 +86,27 @@ public class Attack extends MainPlay {
 
                     switch (l_FirstCommand) {
                         case COMMAND_DEPLOY:
-                            System.out.println("deploy");
+                            processDeployCommand(p_Player,l_CommandArray);
                             break;
 
                         case COMMAND_ADVANCE:
-                            System.out.println("advance");
+                            processAdvanceCommand(p_Player,l_CommandArray);
                             break;
 
                         case COMMAND_BOMB:
-                            System.out.println("bomb");
+                            processBombCommand(p_Player,l_CommandArray);
                             break;
 
                         case COMMAND_BLOCKADE:
-                            System.out.println("blockade");
+                            processBlockadeCommand(p_Player,l_CommandArray);
                             break;
 
                         case COMMAND_AIRLIFT:
-                            System.out.println("airlift");
+                            processAirliftCommand(p_Player,l_CommandArray);
                             break;
 
                         case COMMAND_NEGOTIATE:
-                            System.out.println("negotiate");
+                            processDiplomacyCommand(p_Player,l_CommandArray);
                             break;
 
                         case COMMAND_SHOW_MAP:
@@ -133,13 +133,13 @@ public class Attack extends MainPlay {
         try {
             if (p_Command.length == 3) {
                 String l_CountryName = p_Command[1];
+                Territory l_Territory = d_ge.getMap().getTerritoryByName(l_CountryName);
                 String l_Num = p_Command[2];
                 int l_NumInt = Integer.parseInt(l_Num);
                 int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
                 if (l_ArmyCountOfPlayer >= l_NumInt) {
                     p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
-                    Order o = new Deploy();
-                    //Order2 l_order2 = new Order2(COMMAND_DEPLOY, l_CountryName, l_NumInt);
+                    Order o = new Deploy(p_Player, l_Territory, l_NumInt);
                     p_Player.createOrder(o);
                 } else {
                     System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
@@ -149,4 +149,31 @@ public class Attack extends MainPlay {
             l_E.printStackTrace();
         }
     }
+
+    // TODO:
+    private void processAdvanceCommand(Player player, String[] p_Command){
+        System.out.println("advance command received ..");
+    }
+
+    // TODO:
+    private void processBombCommand(Player player, String[] p_Command){
+        System.out.println("bomb command received ..");
+
+    }
+    // TODO:
+    private void processBlockadeCommand(Player player, String[] p_Command){
+        System.out.println("blockade command received ..");
+
+    }
+    // TODO:
+    private void processAirliftCommand(Player player, String[] p_Command){
+        System.out.println("airlift command received ..");
+
+    }
+    // TODO:
+    private void processDiplomacyCommand(Player player, String[] p_Command){
+        System.out.println("diplomacy command received ..");
+
+    }
+
 }

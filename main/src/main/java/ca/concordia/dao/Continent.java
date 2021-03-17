@@ -3,12 +3,13 @@ package ca.concordia.dao;
 /**
  * This class contains details of the continent
  */
-public class Continent {
+public class Continent extends Territory {
 
     private int d_ID;
     private String d_Name;
     private String d_Color;
     private int d_ArmyCount;
+    private String d_OwnerName;
 
     /**
      * Constructor initializes all the member variables of Continent class
@@ -95,5 +96,16 @@ public class Continent {
      */
     public void setArmyCount(int p_ArmyCount) {
         this.d_ArmyCount = p_ArmyCount;
+    }
+
+
+    @Override
+    public String getOwner() {
+        return d_OwnerName;
+    }
+
+    @Override
+    public void setOwner(String p_OwnerName) {
+        this.d_OwnerName = p_OwnerName;
     }
 }

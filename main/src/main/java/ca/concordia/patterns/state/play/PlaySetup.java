@@ -49,7 +49,7 @@ public class PlaySetup extends Play {
     public void setPlayers(String[] p_Command) {
         System.out.println("gameplayer command received ..... ");
 
-        if(d_ge.getMap() == null){
+        if (d_ge.getMap() == null) {
             System.out.println("map must be loaded before assigning any player");
         }
 

@@ -85,6 +85,22 @@ public class Map {
         this.d_ListOfBorders = p_ListOfBorders;
     }
 
+    public Territory getTerritoryByName(String name) {
+        for (Continent l_Continent : d_ListOfContinents) {
+            if (name.equalsIgnoreCase(l_Continent.getName())) {
+                return l_Continent;
+            }
+        }
+
+        for (Country l_Country : d_ListOfCountries) {
+            if (name.equalsIgnoreCase(l_Country.getName())) {
+                return l_Country;
+            }
+        }
+        return null;
+    }
+
+
     /**
      * This method shows the adjacency between the countries and returns the connected graph.
      *
