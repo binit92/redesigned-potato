@@ -11,19 +11,15 @@ public class Reinforcement extends MainPlay {
     }
 
     public void reinforce() {
-        for (Player l_Player : d_ListOfPlayers) {
-            do {
-                System.out.println("----------------------------------------------------------------");
-                System.out.println("ASSIGN REINFORCEMENT PHASE : " + l_Player.getPlayerName());
-                assignReinforcementPhase(l_Player);
+        System.out.println("reinforcing ");
+        System.out.println("size" + d_ge.getListOfPlayers().size());
+        for (Player l_Player : d_ge.getListOfPlayers()) {
 
-                System.out.println("armies left to deploy are : " + l_Player.getNoOfArmies());
-                if (l_Player.getNoOfArmies() < 1) {
-                    System.out.println("All the reinforcement armies have been placed ..");
-                    break;
-                }
-            } while (true);
+            System.out.println("----------------------------------------------------------------");
+            System.out.println("ASSIGN REINFORCEMENT PHASE : " + l_Player.getPlayerName());
+            assignReinforcementPhase(l_Player);
         }
+        next();
     }
 
     /**
@@ -59,6 +55,7 @@ public class Reinforcement extends MainPlay {
 
     public void next() {
         d_ge.setPhase(new Attack(d_ge));
+        d_ge.getPhase().attack();
     }
 
 }

@@ -160,7 +160,7 @@ public class PostLoad extends Edit {
 
     @Override
     public void setPlayers(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
 

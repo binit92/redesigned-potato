@@ -77,6 +77,7 @@ public class End extends Phase {
     @Override
     public void endGame() {
         System.out.println("Game has ended ! ");
+        System.exit(0);
     }
 
     @Override

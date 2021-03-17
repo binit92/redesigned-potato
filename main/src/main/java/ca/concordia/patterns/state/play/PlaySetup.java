@@ -12,10 +12,9 @@ import java.util.Random;
 
 public class PlaySetup extends Play {
 
-    public PlaySetup(GameEngine p_ge, Map p_map) {
+    public PlaySetup(GameEngine p_ge) {
         //super(p_ge,p_map);
         super(p_ge);
-        super.d_map = p_map;
     }
 
     /**
@@ -34,7 +33,7 @@ public class PlaySetup extends Play {
                     Map l_Map = MapEditor.getInstance().readMapFile(l_MapFile);
 
                     // TODO : updating map in the parent .. (review this)
-                    super.d_map = l_Map;
+                    d_ge.setMap(l_Map);
                     System.out.println(" map is successfully loaded and ready for gameplay ..");
 
                 } else {
@@ -49,6 +48,10 @@ public class PlaySetup extends Play {
     @Override
     public void setPlayers(String[] p_Command) {
         System.out.println("gameplayer command received ..... ");
+
+        if(d_ge.getMap() == null){
+            System.out.println("map must be loaded before assigning any player");
+        }
 
         for (int l_I = 0; l_I < p_Command.length; l_I++) {
             String l_Tag = p_Command[l_I];
@@ -82,7 +85,7 @@ public class PlaySetup extends Play {
      */
     private boolean addPlayer(String p_PlayerName) {
         int l_Count = 0;
-        for (Player l_Player : d_ListOfPlayers) {
+        for (Player l_Player : d_ge.getListOfPlayers()) {
             l_Count++;
             if (l_Player.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
                 System.out.println("A player with name: " + p_PlayerName + " already exists!");
@@ -90,7 +93,7 @@ public class PlaySetup extends Play {
             }
         }
         Player l_NewPlayer = new Player(p_PlayerName, l_Count);
-        return d_ListOfPlayers.add(l_NewPlayer);
+        return d_ge.getListOfPlayers().add(l_NewPlayer);
     }
 
     /**
@@ -100,9 +103,9 @@ public class PlaySetup extends Play {
      * @return boolean
      */
     private boolean removePlayer(String p_PlayerName) {
-        for (Player l_Player : d_ListOfPlayers) {
+        for (Player l_Player : d_ge.getListOfPlayers()) {
             if (l_Player.getPlayerName().equalsIgnoreCase(p_PlayerName)) {
-                return d_ListOfPlayers.remove(l_Player);
+                return d_ge.getListOfPlayers().remove(l_Player);
             }
         }
         System.out.println("player not found : " + p_PlayerName);
@@ -112,13 +115,17 @@ public class PlaySetup extends Play {
 
     @Override
     public void assignCountries() {
-
         System.out.println("assigncountries command received..");
         try {
-            int l_NumberOfPlayers = d_ListOfPlayers.size();
+            int l_NumberOfPlayers = d_ge.getListOfPlayers().size();
             if (l_NumberOfPlayers >= 3 && l_NumberOfPlayers <= 5) {
+
                 System.out.println("number of countries between [3 to 5] so assign countries to player now ..");
-                assignCountriesToPlayers();
+                if (assignCountriesToPlayers()) {
+                    // start main-loop after this..
+                    d_ge.setPhase(new Reinforcement(d_ge));
+                    d_ge.getPhase().reinforce();
+                }
             } else {
                 System.out.println("number of player must be between [3 to 5] to state main-game-loop");
             }
@@ -126,10 +133,6 @@ public class PlaySetup extends Play {
         } catch (Exception l_E) {
             l_E.printStackTrace();
         }
-
-        // start main-loop after this..
-        d_ge.setPhase(new Reinforcement(d_ge));
-
     }
 
 
@@ -139,29 +142,29 @@ public class PlaySetup extends Play {
      * @return boolean
      */
     private boolean assignCountriesToPlayers() {
-        if (d_ListOfPlayers.size() < MINIMUM_PLAYER_COUNT) {
+        if (d_ge.getListOfPlayers().size() < MINIMUM_PLAYER_COUNT) {
             System.out.println("Number of players should be atleast " + MINIMUM_PLAYER_COUNT + " to start assigning countries");
             return false;
         }
-        if (d_map.getListOfCountries().size() == 0) {
+        if (d_ge.getMap().getListOfCountries().size() == 0) {
             System.out.println("Zero countries in the map, so unable to assign anything to players");
             return false;
         }
-        System.out.println("Number of countries available is : " + d_map.getListOfCountries().size());
+        System.out.println("Number of countries available is : " + d_ge.getMap().getListOfCountries().size());
 
         System.out.println("start assigning countries ");
 
-        int l_CountryCount = d_map.getListOfCountries().size();
-        int l_PlayerCount = this.d_ListOfPlayers.size();
+        int l_CountryCount = d_ge.getMap().getListOfCountries().size();
+        int l_PlayerCount = d_ge.getListOfPlayers().size();
         int l_PlayerCountryRatio = l_CountryCount / l_PlayerCount;
         System.out.println("player-country ratio: " + l_PlayerCountryRatio);
         ArrayList<Country> l_CountriesToAssignRandomly = new ArrayList<Country>();
-        for (Country l_Country : d_map.getListOfCountries()) {
+        for (Country l_Country : d_ge.getMap().getListOfCountries()) {
             l_CountriesToAssignRandomly.add(l_Country);
         }
 
         while (l_CountriesToAssignRandomly.size() > 0) {
-            for (Player l_Player : d_ListOfPlayers) {
+            for (Player l_Player : d_ge.getListOfPlayers()) {
                 if (l_CountriesToAssignRandomly.size() == 0) {
                     System.out.println("All countries has been assigned ");
                     break;
@@ -182,5 +185,4 @@ public class PlaySetup extends Play {
         }
         return true;
     }
-
 }

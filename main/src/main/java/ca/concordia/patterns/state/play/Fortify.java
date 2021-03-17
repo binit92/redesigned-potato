@@ -3,6 +3,7 @@ package ca.concordia.patterns.state.play;
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.Order;
+import ca.concordia.patterns.state.end.End;
 
 public class Fortify extends MainPlay {
     public Fortify(GameEngine p_ge) {
@@ -11,6 +12,7 @@ public class Fortify extends MainPlay {
 
     public void next() {
         d_ge.setPhase(new Reinforcement(d_ge));
+        d_ge.getPhase().reinforce();
     }
 
     public void reinforce() {
@@ -22,9 +24,36 @@ public class Fortify extends MainPlay {
     }
 
     public void fortify() {
-
+        System.out.println("fortifying");
+        executeAllOrders();
+        showMap();
+        checkForEnd();
     }
 
+    private void executeAllOrders() {
+        Order order;
+        boolean still_more_orders = false;
+        do {
+            still_more_orders = false;
+            for (Player p : d_ge.getListOfPlayers()) {
+                order = p.nextOrder();
+
+                if (order != null) {
+                    still_more_orders = true;
+                    order.printOrder();
+                    order.execute();
+                }
+            }
+        } while (still_more_orders);
+    }
+
+    private void checkForEnd() {
+        if (d_ge.getListOfPlayers().size() < 2) {
+            d_ge.setPhase(new End(d_ge));
+        } else {
+            next();
+        }
+    }
 
     /**
      * @param p_Player "to be updated"

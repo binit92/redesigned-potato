@@ -4,6 +4,7 @@ import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.command.Deploy;
 import ca.concordia.patterns.command.Order;
+import ca.concordia.patterns.state.end.End;
 
 import java.util.Scanner;
 
@@ -24,6 +25,7 @@ public class Attack extends MainPlay {
 
     public void next() {
         d_ge.setPhase(new Fortify(d_ge));
+        d_ge.getPhase().next();
     }
 
     public void reinforce() {
@@ -32,7 +34,8 @@ public class Attack extends MainPlay {
 
     @Override
     public void attack() {
-        for (Player l_Player : d_ListOfPlayers) {
+        System.out.println("attacking");
+        for (Player l_Player : d_ge.getListOfPlayers()) {
             boolean l_MaintainLoop = true;
             do {
                 takeOrder(l_Player);
@@ -42,6 +45,7 @@ public class Attack extends MainPlay {
                 }
             } while (l_MaintainLoop);
         }
+        next();
     }
 
     public void fortify() {
@@ -50,6 +54,7 @@ public class Attack extends MainPlay {
 
 
     void takeOrder(Player p_Player) {
+        System.out.println("taking order ");
         Scanner keyboard = new Scanner(System.in);
         boolean l_MaintainLoop = true;
         do {
@@ -68,40 +73,50 @@ public class Attack extends MainPlay {
 
             if ("quit".equalsIgnoreCase(l_CommandInput)) {
                 //TODO: end the game if quit is passed during the attack ?
-                break;
+                
+                d_ge.getPhase().endGame();
+                return;
             }
 
-            switch (l_CommandInput) {
-                case COMMAND_DEPLOY:
-                    System.out.println("deploy");
-                    break;
+            if (l_CommandInput.length() > 0) {
+                String[] l_CommandArray = l_CommandInput.trim().split(" ");
+                if (l_CommandArray.length > 0) {
+                    String l_FirstCommand = l_CommandArray[0].toLowerCase();
+                    System.out.println("firstCommand : " + l_FirstCommand);
 
-                case COMMAND_ADVANCE:
-                    System.out.println("advance");
-                    break;
+                    switch (l_FirstCommand) {
+                        case COMMAND_DEPLOY:
+                            System.out.println("deploy");
+                            break;
 
-                case COMMAND_BOMB:
-                    System.out.println("bomb");
-                    break;
+                        case COMMAND_ADVANCE:
+                            System.out.println("advance");
+                            break;
 
-                case COMMAND_BLOCKADE:
-                    System.out.println("blockade");
-                    break;
+                        case COMMAND_BOMB:
+                            System.out.println("bomb");
+                            break;
 
-                case COMMAND_AIRLIFT:
-                    System.out.println("airlift");
-                    break;
+                        case COMMAND_BLOCKADE:
+                            System.out.println("blockade");
+                            break;
 
-                case COMMAND_NEGOTIATE:
-                    System.out.println("negotiate");
-                    break;
+                        case COMMAND_AIRLIFT:
+                            System.out.println("airlift");
+                            break;
 
-                case COMMAND_SHOW_MAP:
-                    showMap();
-                    break;
+                        case COMMAND_NEGOTIATE:
+                            System.out.println("negotiate");
+                            break;
 
-                default:
-                    System.out.println("INVALID COMMAND in MainPlay:Order phase");
+                        case COMMAND_SHOW_MAP:
+                            showMap();
+                            break;
+
+                        default:
+                            System.out.println("INVALID COMMAND in MainPlay:Order phase");
+                    }
+                }
             }
         } while (l_MaintainLoop);
         keyboard.close();

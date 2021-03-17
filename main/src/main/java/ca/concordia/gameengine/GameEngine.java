@@ -1,9 +1,13 @@
 package ca.concordia.gameengine;
 
+import ca.concordia.dao.Map;
+import ca.concordia.dao.Player;
 import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.edit.Preload;
 import ca.concordia.patterns.state.play.PlaySetup;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -30,9 +34,27 @@ public class GameEngine {
 
     // data members
     private Phase d_GamePhase;
+    private Map d_Map;
+    private List<Player> d_ListOfPlayers = new ArrayList<Player>();
+
+    public Phase getPhase() {
+        return d_GamePhase;
+    }
 
     public void setPhase(Phase p_Phase) {
         this.d_GamePhase = p_Phase;
+    }
+
+    public Map getMap() {
+        return d_Map;
+    }
+
+    public void setMap(Map p_Map) {
+        d_Map = p_Map;
+    }
+
+    public List<Player> getListOfPlayers() {
+        return d_ListOfPlayers;
     }
 
     public void start() {
@@ -53,7 +75,7 @@ public class GameEngine {
                     break;
                 case "play":
                     // setting phase as playsetup
-                    setPhase(new PlaySetup(this, null));
+                    setPhase(new PlaySetup(this));
                     startMainPlay(keyboard);
                     break;
                 case "quit":
@@ -61,37 +83,6 @@ public class GameEngine {
             }
 
         } while (true);
-        // can change the state of the context (Game Engine) object, e.g.
-
-        //setPhase(new Preload(this));
-        //setPhase(new PostLoad(this));
-
-        // can trigger state independent behaviour by using the methods
-        // define in the State(phase) object e.g.
-
-
-        //TODO
-        /*
-        d_GamePhase.loadMap();
-        d_GamePhase.reinforce();
-        d_GamePhase.next();
-        */
-
-        /*
-        for (int turn = 1; turn <= numTurns; turn++) {
-            boolean an_order = true;
-            do {
-                for (ca.concordia.pattern.command.Player p : players) {
-                    an_order = p.createOrder(map, players);
-                    if (!an_order) {
-                        break;
-                    }
-                }
-            } while (an_order);
-            executeAllOrders();
-            printMap();
-        }
-        */
     }
 
     void startMapEditor(Scanner keyboard) {
@@ -160,7 +151,6 @@ public class GameEngine {
     void startMainPlay(Scanner keyboard) {
         boolean l_MaintainLoop = true;
         do {
-
             System.out.println("============================================================================================");
             System.out.println("| PHASE                : command         command arguments                                 |");
             System.out.println("| Any                  : showmap                                                           |");
@@ -193,7 +183,6 @@ public class GameEngine {
 
                         case COMMAND_ASSIGN_COUNTRIES:
                             d_GamePhase.assignCountries();
-                            l_MaintainLoop = false;
                             break;
 
                         case COMMAND_SHOW_MAP:
@@ -206,25 +195,5 @@ public class GameEngine {
                 }
             }
         } while (l_MaintainLoop);
-    }
-
-    void executeAllOrders() {
-        /*
-        Order order;
-        boolean still_more_orders = false;
-        do {
-            still_more_orders = false;
-            for (ca.concordia.pattern.command.Player p : players) {
-                order = p.getNextOrder();
-
-                if (order != null) {
-                    still_more_orders = true;
-                    order.printOrder();
-                    order.execute();
-                }
-            }
-        } while (still_more_orders);
-
-         */
     }
 }

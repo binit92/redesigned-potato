@@ -1,6 +1,9 @@
 package ca.concordia;
 
-import ca.concordia.dao.*;
+import ca.concordia.dao.BorderTest;
+import ca.concordia.dao.ContinentTest;
+import ca.concordia.dao.CountryTest;
+import ca.concordia.dao.PlayerTest;
 import ca.concordia.gameengine.GameEngineTest;
 import ca.concordia.mapworks.MapEditorTest;
 import ca.concordia.mapworks.ValidateMapTest;
@@ -15,10 +18,8 @@ import org.junit.runners.Suite;
         BorderTest.class,
         ContinentTest.class,
         CountryTest.class,
-        Order2Test.class,
         PlayerTest.class,
         GameEngineTest.class,
-        PlayerActionsTest.class,
         MapEditorTest.class,
         ValidateMapTest.class
 })

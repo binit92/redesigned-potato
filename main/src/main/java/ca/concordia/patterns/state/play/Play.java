@@ -6,20 +6,11 @@ import ca.concordia.dao.Map;
 import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
 import ca.concordia.patterns.state.Phase;
-
-import java.util.ArrayList;
-import java.util.List;
+import ca.concordia.patterns.state.end.End;
 
 public class Play extends Phase {
 
     final int MINIMUM_PLAYER_COUNT = 3;
-    Map d_map;
-    List<Player> d_ListOfPlayers = new ArrayList<Player>();
-
-    public Play(GameEngine p_ge, Map p_map) {
-        super(p_ge);
-        d_map = p_map;
-    }
 
     public Play(GameEngine p_ge) {
         super(p_ge);
@@ -42,9 +33,12 @@ public class Play extends Phase {
     @Override
     public void showMap() {
         System.out.println("show game command received ");
-        Graph l_Graph = d_map.getAdjacencyMatrix();
-        System.out.println(l_Graph.toString());
-        for (Player l_Player : d_ListOfPlayers) {
+        Map l_Map = d_ge.getMap();
+        if (l_Map != null) {
+            Graph l_Graph = l_Map.getAdjacencyMatrix();
+            System.out.println(l_Graph.toString());
+        }
+        for (Player l_Player : d_ge.getListOfPlayers()) {
             System.out.println("------------------------------------------------------------------------------------------------------------------------");
             System.out.println("PLAYER: " + l_Player.getPlayerName());
             System.out.println("with total army count of : " + l_Player.getNoOfArmies());
@@ -117,12 +111,14 @@ public class Play extends Phase {
 
     @Override
     public void endGame() {
-        // TODO
-        //ge.setPhase(new End(ge));
+        d_ge.setPhase(new End(d_ge));
+        d_ge.getPhase().endGame();
     }
 
     @Override
     public void next() {
 
     }
+
+
 }
