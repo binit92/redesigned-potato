@@ -1,29 +1,137 @@
 package ca.concordia.patterns.state.play;
 
+import ca.concordia.dao.Player;
 import ca.concordia.gameengine.GameEngine;
+import ca.concordia.patterns.command.Deploy;
+import ca.concordia.patterns.command.Order;
+
+import java.util.Scanner;
 
 public class Attack extends MainPlay {
+
+    public static final String COMMAND_SHOW_MAP = "showmap";
+    public static final String COMMAND_DEPLOY = "deploy";
+    public static final String COMMAND_ADVANCE = "advance";
+    public static final String COMMAND_BOMB = "bomb";
+    public static final String COMMAND_BLOCKADE = "blockade";
+    public static final String COMMAND_AIRLIFT = "airlift";
+    public static final String COMMAND_NEGOTIATE = "negotiate";
+
 
     public Attack(GameEngine p_ge) {
         super(p_ge);
     }
 
     public void next() {
-        //TODO
-        //ge.setPhase(new Fortify(ge));
+        d_ge.setPhase(new Fortify(d_ge));
     }
 
     public void reinforce() {
         printInvalidCommandMessage();
     }
 
+    @Override
     public void attack() {
-        System.out.println("attack done");
-        //TODO
-        //ge.setPhase(new Fortify(ge));
+        for (Player l_Player : d_ListOfPlayers) {
+            boolean l_MaintainLoop = true;
+            do {
+                takeOrder(l_Player);
+                if (l_Player.getNoOfArmies() < 1) {
+                    System.out.println("All the reinforcement armies have been placed ..");
+                    break;
+                }
+            } while (l_MaintainLoop);
+        }
     }
 
     public void fortify() {
         printInvalidCommandMessage();
+    }
+
+
+    void takeOrder(Player p_Player) {
+        Scanner keyboard = new Scanner(System.in);
+        boolean l_MaintainLoop = true;
+        do {
+            System.out.println("============================================================================================");
+            System.out.println("| Play:MainPlay:Order  : deploy          <country-name> <num-of-armies>                    |");
+            System.out.println("| Play:MainPlay:Order  : advance         <country-from> <country-to> <num-of-armies>       |");
+            System.out.println("| Play:MainPlay:Order  : bomb            <country-name>                                    |");
+            System.out.println("| Play:MainPlay:Order  : blockade        <country-name>                                    |");
+            System.out.println("| Play:MainPlay:Order  : airlift         <source-country> <target-country> <num-of-armies> |");
+            System.out.println("| Play:MainPlay:Order  : negotiate       <player-name>                                     |");
+            System.out.println("| Any                  : showmap                                                           |");
+            System.out.println("| Any                  : quit                                                              |");
+            System.out.println("============================================================================================");
+
+            String l_CommandInput = keyboard.nextLine();
+
+            if ("quit".equalsIgnoreCase(l_CommandInput)) {
+                //TODO: end the game if quit is passed during the attack ?
+                break;
+            }
+
+            switch (l_CommandInput) {
+                case COMMAND_DEPLOY:
+                    System.out.println("deploy");
+                    break;
+
+                case COMMAND_ADVANCE:
+                    System.out.println("advance");
+                    break;
+
+                case COMMAND_BOMB:
+                    System.out.println("bomb");
+                    break;
+
+                case COMMAND_BLOCKADE:
+                    System.out.println("blockade");
+                    break;
+
+                case COMMAND_AIRLIFT:
+                    System.out.println("airlift");
+                    break;
+
+                case COMMAND_NEGOTIATE:
+                    System.out.println("negotiate");
+                    break;
+
+                case COMMAND_SHOW_MAP:
+                    showMap();
+                    break;
+
+                default:
+                    System.out.println("INVALID COMMAND in MainPlay:Order phase");
+            }
+        } while (l_MaintainLoop);
+        keyboard.close();
+    }
+
+    /**
+     * Helper method to process deploy command
+     *
+     * @param p_Player  playername
+     * @param p_Command actions for the player e.g. deploy
+     */
+    private void processDeployCommand(Player p_Player, String[] p_Command) {
+        System.out.println("deploy  command received ..... ");
+        try {
+            if (p_Command.length == 3) {
+                String l_CountryName = p_Command[1];
+                String l_Num = p_Command[2];
+                int l_NumInt = Integer.parseInt(l_Num);
+                int l_ArmyCountOfPlayer = p_Player.getNoOfArmies();
+                if (l_ArmyCountOfPlayer >= l_NumInt) {
+                    p_Player.setNoOfArmies(l_ArmyCountOfPlayer - l_NumInt);
+                    Order o = new Deploy();
+                    //Order2 l_order2 = new Order2(COMMAND_DEPLOY, l_CountryName, l_NumInt);
+                    p_Player.createOrder(o);
+                } else {
+                    System.out.println("TRY AGAIN: only " + l_ArmyCountOfPlayer + " is available to be deployed !");
+                }
+            }
+        } catch (Exception l_E) {
+            l_E.printStackTrace();
+        }
     }
 }

@@ -1,10 +1,9 @@
 package ca.concordia;
 
+import ca.concordia.dao.*;
 import ca.concordia.gameengine.GameEngineTest;
-import ca.concordia.gameengine.PlayerActionsTest;
 import ca.concordia.mapworks.MapEditorTest;
 import ca.concordia.mapworks.ValidateMapTest;
-import ca.concordia.dao.*;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

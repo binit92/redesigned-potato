@@ -14,9 +14,10 @@ public abstract class MainPlay extends Play {
     }
 
     public void setPlayers() {
-        this.printInvalidCommandMessage(); }
+        this.printInvalidCommandMessage();
+    }
 
-        public void assignCountries() {
+    public void assignCountries() {
         this.printInvalidCommandMessage();
     }
 }

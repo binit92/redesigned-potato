@@ -207,8 +207,7 @@ public class MapEditor {
                     }
                     l_BorderFound = true;
 
-                }
-                else if (l_Border.getCountryId() == l_NeighborID) {
+                } else if (l_Border.getCountryId() == l_NeighborID) {
                     if (!l_Border.isNeighbour(l_NeighborID)) {
                         l_Border.addNeighbour(l_NeighborID);
                     }

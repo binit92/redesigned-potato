@@ -61,22 +61,22 @@ public class End extends Phase {
 
     @Override
     public void reinforce() {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void attack() {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void fortify() {
-
+        printInvalidCommandMessage();
     }
 
     @Override
     public void endGame() {
-
+        System.out.println("Game has ended ! ");
     }
 
     @Override

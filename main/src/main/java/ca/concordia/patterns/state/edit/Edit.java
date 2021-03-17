@@ -14,7 +14,7 @@ public abstract class Edit extends Phase {
         MapEditor.getInstance().showMap();
     }
 
-    public void setPlayers() {
+    public void setPlayers(String[] p_Command) {
         printInvalidCommandMessage();
     }
 

@@ -1,7 +1,7 @@
 package ca.concordia.patterns.command;
 
 //   ConcreteCommand of the the Command pattern.
-public class Advance implements Order{
+public class Advance implements Order {
 
     //Territory source;
     //Territory target;

@@ -124,6 +124,8 @@ public class PostLoad extends Edit {
         } catch (ArrayIndexOutOfBoundsException p_A) {
             p_A.printStackTrace();
         }
+        // TODO : is setting PlaySetup state valid here ..
+        // d_ge.setPhase(new PlaySetup(d_ge));
     }
 
     @Override
@@ -153,7 +155,7 @@ public class PostLoad extends Edit {
 
     @Override
     public void loadMap(String[] p_Command) {
-
+        printInvalidCommandMessage();
     }
 
     @Override
@@ -161,14 +163,8 @@ public class PostLoad extends Edit {
 
     }
 
-    public void loadMap() {
-        System.out.println("map has been loaded");
-    }
 
-    public void editCountry() {
-        System.out.println("country has been edited");
-    }
-
+    // TODO : review this:
     public void saveMap() {
         System.out.println("map has been  saved");
         //TODO

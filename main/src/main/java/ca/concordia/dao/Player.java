@@ -1,5 +1,7 @@
 package ca.concordia.dao;
 
+import ca.concordia.patterns.command.Order;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class Player {
     private int d_NoOfArmies;
     private List<Country> d_ListOfCountries = new ArrayList<Country>();
     private List<Continent> d_ListOfContinents = new ArrayList<Continent>();
-    private List<Order2> d_ListOfOrder2s = new ArrayList<Order2>();
+    private List<Order> d_ListOfOrders = new ArrayList<Order>();
 
     /**
      * Constructor initializes the following below member variables of Player class
@@ -157,52 +159,9 @@ public class Player {
         return d_ListOfContinents.remove(p_Continent);
     }
 
-    /**
-     * This method returns the list of Orders issued by each Player
-     *
-     * @return d_ListOfOrders
-     */
-    public List<Order2> getListOfOrders() {
-        return d_ListOfOrder2s;
-    }
 
-    /**
-     * This method sets the list of Orders issued by each Player
-     *
-     * @param p_ListOfOrder2s list of Orders
-     */
-    public void setListOfOrders(List<Order2> p_ListOfOrder2s) {
-        this.d_ListOfOrder2s = p_ListOfOrder2s;
-    }
-
-    /**
-     * This method is called by the GameEngine during the execute orders phase
-     * and returns the first order in the player’s list of orders,
-     * then removes it from the list
-     *
-     * @return next order to be executed
-     */
-
-    public boolean addNewOrder(Order2 p_Order2) {
-        return d_ListOfOrder2s.add(p_Order2);
-    }
-
-    public boolean removeOrder(Order2 p_Order2) {
-        return d_ListOfOrder2s.remove(p_Order2);
-    }
-
-
-    /**
-     * whose function is to add an order to the list of orders held by the player
-     * when the game engine calls it during the issue orders phase
-     */
-    public void issueOrder() {
-        System.out.println("Number of armies available for player " + d_PlayerName + " is " + getNoOfArmies());
-        System.out.print("Countries available for player are: ");
-        for (Country l_country : d_ListOfCountries) {
-            System.out.print(" " + l_country.getName() + " ");
-        }
-        System.out.println("");
+    public void createOrder(Order o) {
+        d_ListOfOrders.add(o);
     }
 
     /**
@@ -213,9 +172,12 @@ public class Player {
      *
      * @return
      */
-    public Order2 nextOrder() {
-        if (d_ListOfOrder2s.size() > 0) {
-            return d_ListOfOrder2s.get(0);
+    public Order nextOrder() {
+        Order to_return = null;
+        if (d_ListOfOrders.size() > 0) {
+            to_return = d_ListOfOrders.get(0);
+            d_ListOfOrders.remove(0);
+            return to_return;
         }
         return null;
     }

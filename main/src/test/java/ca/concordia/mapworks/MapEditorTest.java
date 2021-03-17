@@ -1,6 +1,5 @@
 package ca.concordia.mapworks;
 
-import ca.concordia.mapworks.MapEditor;
 import ca.concordia.dao.Border;
 import ca.concordia.dao.Continent;
 import ca.concordia.dao.Country;
@@ -47,6 +46,7 @@ public class MapEditorTest {
 
     /**
      * Test mapeditor functions
+     *
      * @throws IOException
      */
     @Test

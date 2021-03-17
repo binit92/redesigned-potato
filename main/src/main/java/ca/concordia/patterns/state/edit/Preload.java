@@ -4,7 +4,7 @@ import ca.concordia.gameengine.GameEngine;
 
 public class Preload extends Edit {
 
-    public Preload(GameEngine p_ge){
+    public Preload(GameEngine p_ge) {
         super(p_ge);
     }
 

@@ -1,6 +1,5 @@
 package ca.concordia.mapworks;
 
-import ca.concordia.mapworks.ValidateMap;
 import ca.concordia.dao.*;
 import org.junit.Before;
 import org.junit.Test;
