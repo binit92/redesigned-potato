@@ -28,7 +28,7 @@ public class Blockade implements Order {
     }
 
     public boolean valid() {
-        if (target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName()) ){
+        if (target_territory.getOwner().equalsIgnoreCase(initiator.getPlayerName())) {
             // the target territory must belong to the player that created the order
             return true;
         }

@@ -86,27 +86,27 @@ public class Attack extends MainPlay {
 
                     switch (l_FirstCommand) {
                         case COMMAND_DEPLOY:
-                            processDeployCommand(p_Player,l_CommandArray);
+                            processDeployCommand(p_Player, l_CommandArray);
                             break;
 
                         case COMMAND_ADVANCE:
-                            processAdvanceCommand(p_Player,l_CommandArray);
+                            processAdvanceCommand(p_Player, l_CommandArray);
                             break;
 
                         case COMMAND_BOMB:
-                            processBombCommand(p_Player,l_CommandArray);
+                            processBombCommand(p_Player, l_CommandArray);
                             break;
 
                         case COMMAND_BLOCKADE:
-                            processBlockadeCommand(p_Player,l_CommandArray);
+                            processBlockadeCommand(p_Player, l_CommandArray);
                             break;
 
                         case COMMAND_AIRLIFT:
-                            processAirliftCommand(p_Player,l_CommandArray);
+                            processAirliftCommand(p_Player, l_CommandArray);
                             break;
 
                         case COMMAND_NEGOTIATE:
-                            processDiplomacyCommand(p_Player,l_CommandArray);
+                            processDiplomacyCommand(p_Player, l_CommandArray);
                             break;
 
                         case COMMAND_SHOW_MAP:
@@ -151,27 +151,30 @@ public class Attack extends MainPlay {
     }
 
     // TODO:
-    private void processAdvanceCommand(Player player, String[] p_Command){
+    private void processAdvanceCommand(Player player, String[] p_Command) {
         System.out.println("advance command received ..");
     }
 
     // TODO:
-    private void processBombCommand(Player player, String[] p_Command){
+    private void processBombCommand(Player player, String[] p_Command) {
         System.out.println("bomb command received ..");
 
     }
+
     // TODO:
-    private void processBlockadeCommand(Player player, String[] p_Command){
+    private void processBlockadeCommand(Player player, String[] p_Command) {
         System.out.println("blockade command received ..");
 
     }
+
     // TODO:
-    private void processAirliftCommand(Player player, String[] p_Command){
+    private void processAirliftCommand(Player player, String[] p_Command) {
         System.out.println("airlift command received ..");
 
     }
+
     // TODO:
-    private void processDiplomacyCommand(Player player, String[] p_Command){
+    private void processDiplomacyCommand(Player player, String[] p_Command) {
         System.out.println("diplomacy command received ..");
 
     }

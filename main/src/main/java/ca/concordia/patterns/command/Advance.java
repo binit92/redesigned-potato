@@ -21,7 +21,6 @@ public class Advance implements Order {
     }
 
 
-
     public void execute() {
         // Here both the source and the target Territories are Receivers
         System.out.println("advance execute ");
