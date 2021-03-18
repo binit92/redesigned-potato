@@ -1,6 +1,8 @@
 package ca.concordia.mapworks;
 
 import ca.concordia.dao.*;
+import ca.concordia.patterns.observer.LogUtil;
+import sun.rmi.runtime.Log;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -324,7 +326,6 @@ public class MapEditor {
      */
     public void editMap(File p_MapPath) throws IOException {
         readMapFile(p_MapPath);
-
         validateMap();
     }
 
@@ -355,6 +356,7 @@ public class MapEditor {
     public Map readMapFile(File p_MapFile) throws IOException {
         resetCurrentMap();
         if (p_MapFile != null && p_MapFile.exists()) {
+            LogUtil.log("reading .map file from path: " + p_MapFile.getAbsolutePath());
             System.out.println("reading .map file from path: " + p_MapFile.getAbsolutePath());
             FileReader l_Fr = new FileReader(p_MapFile);
             BufferedReader l_Br = new BufferedReader(l_Fr);
@@ -454,6 +456,7 @@ public class MapEditor {
         l_BufferedWriter.close();
         l_FileWriter.close();
 
+        LogUtil.log("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
         System.out.println("Successfully written map to .map file at: " + p_MapFile.getAbsolutePath());
     }
 

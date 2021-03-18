@@ -2,18 +2,23 @@ package ca.concordia.gameengine;
 
 import ca.concordia.dao.Map;
 import ca.concordia.dao.Player;
+import ca.concordia.patterns.observer.LogEntryBuffer;
+import ca.concordia.patterns.observer.LogUtil;
 import ca.concordia.patterns.state.Phase;
 import ca.concordia.patterns.state.edit.Preload;
 import ca.concordia.patterns.state.play.PlaySetup;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Scanner;
 
 /**
  * Game Engine class that starts with "loadmap" command and automatically ends after mainloop phases
  */
-public class GameEngine {
+public class GameEngine  {
+
 
     // Map editor commands
     public static final String COMMAND_EDIT_CONTINENT = "editcontinent";
@@ -58,6 +63,8 @@ public class GameEngine {
     }
 
     public void start() {
+        LogUtil.clearOldLogFiles();
+        LogUtil.log("Game Engine started");
         Scanner keyboard = new Scanner(System.in);
         do {
             System.out.println("========================================");
@@ -67,6 +74,7 @@ public class GameEngine {
             System.out.println("choose one of the option from above?: ");
             System.out.println("=======================================");
             String l_Input = keyboard.nextLine();
+            LogUtil.log(l_Input);
             switch (l_Input) {
                 case "edit":
                     // setting phase as preload
@@ -100,6 +108,7 @@ public class GameEngine {
             System.out.println("| Any            : quit                                                                          |");
             System.out.println("===================================================================================================");
             String l_EditInput = keyboard.nextLine();
+            LogUtil.log(l_EditInput);
 
             if ("quit".equalsIgnoreCase(l_EditInput)) {
                 break;
@@ -161,6 +170,7 @@ public class GameEngine {
             System.out.println("============================================================================================");
 
             String l_GameInput = keyboard.nextLine();
+            LogUtil.log(l_GameInput);
 
             if ("quit".equalsIgnoreCase(l_GameInput)) {
                 break;
@@ -196,4 +206,6 @@ public class GameEngine {
             }
         } while (l_MaintainLoop);
     }
+
+
 }
